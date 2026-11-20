@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Reportes{% endblock %}
+{% block content %}
+<h3>📊 Reportes de ventas</h3>
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card card-stat shadow-sm"><div class="card-body">
+      <h6 class="text-muted">Hoy</h6>
+      <h4>${{ '{:,.0f}'.format(total_dia) }}</h4>
+      <small class="text-muted">{{ trans_dia }} transacciones</small>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-stat shadow-sm"><div class="card-body">
+      <h6 class="text-muted">Últimos 7 días</h6>
+      <h4>${{ '{:,.0f}'.format(total_semana) }}</h4>
+      <small class="text-muted">{{ trans_semana }} transacciones</small>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-stat shadow-sm"><div class="card-body">
+      <h6 class="text-muted">Últimos 30 días</h6>
+      <h4>${{ '{:,.0f}'.format(total_mes) }}</h4>
+      <small class="text-muted">{{ trans_mes }} transacciones</small>
+    </div></div>
+  </div>
+</div>
+
+<h5>Rotación de productos (unidades vendidas históricas)</h5>
+<table class="table table-striped bg-white shadow-sm">
+  <thead><tr><th>Producto</th><th>Unidades vendidas</th></tr></thead>
+  <tbody>
+    {% for nombre, vendidos in rotacion %}
+    <tr><td>{{ nombre }}</td><td>{{ vendidos }}</td></tr>
+    {% else %}
+    <tr><td colspan="2" class="text-center text-muted">Aún no hay datos de ventas.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
