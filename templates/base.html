@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Tienda Suba{% endblock %} - Sistema de Inventario y Ventas</title>
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <style>
+    body { background:#f4f6f8; }
+    .navbar-brand { font-weight:700; }
+    .card-stat { border-left:5px solid #2C5F8A; }
+    .alert-stock { border-left:5px solid #B9770E; background:#FDEBD3; }
+    .alert-venc { border-left:5px solid #943126; background:#F9EBEA; }
+    footer { color:#888; font-size:12px; margin-top:40px; }
+  </style>
+</head>
+<body>
+{% if session.get('tendero_id') %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#2C5F8A;">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('dashboard') }}">🏪 {{ session.get('tienda') }}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">Inventario</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('venta_nueva') }}">Nueva venta</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('ventas_lista') }}">Ventas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('reportes') }}">Reportes</a></li>
+      </ul>
+      <span class="navbar-text text-white me-3">👤 {{ session.get('tendero_nombre') }}</span>
+      <a class="btn btn-outline-light btn-sm" href="{{ url_for('logout') }}">Salir</a>
+    </div>
+  </div>
+</nav>
+{% endif %}
+
+<div class="container py-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <footer class="text-center">
+    Sistema web para la gestión de inventario y ventas en tiendas de barrio — Proyecto de Grado UNAD — Ingeniería de Sistemas
+  </footer>
+</div>
+
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
