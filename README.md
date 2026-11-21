@@ -1,7 +1,7 @@
 # Sistema web para la gestión de inventario y ventas en tiendas de barrio
 
 **Proyecto de Grado — UNAD — Ingeniería de Sistemas (202016907)**
-**Autores:** Andrés Felipe Velandia Naranjo, Andrés Felipe Pérez Pérez
+**Autores:** Andrés Felipe Pérez Pérez, Andrés Felipe Velandia Naranjo 
 
 Prototipo funcional (Fase 4 — nivel de madurez tecnológica TRL5) del sistema de información
 web para la gestión de inventario y ventas dirigido a tiendas de barrio de la localidad de
